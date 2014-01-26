@@ -34,8 +34,8 @@ contains roughly the equivalent code:
 ```
 
 Because we will be using our own testing solution instead of `lein
-cljsbuild test`, it will be necissary to save a copy of the
-[test runner code][runner.js] &mdash; which now comes prepacked with
+cljsbuild test`, it will be necessary to save a copy of the
+[test runner code][runner.js] &mdash; which now comes prepackaged with
 `clojurescript.test` &mdash; to somewhere in your
 project directory. I like to save this file to `test/runner.js`.
 
