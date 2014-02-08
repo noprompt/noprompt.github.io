@@ -7,53 +7,10 @@
             [garden.color :as color :refer [hsl]]
             [garden.stylesheet :refer [at-import]]
             [garden.arithmetic :refer [+ - * /]]
-            [garden.repl]))
-
-(def STYLESHEET-PATH
-  (.. (io/file "../../css/")
-      getCanonicalPath))
-
-(def MAIN-STYLESHEET-PATH
-  (.. (io/file STYLESHEET-PATH "main.css")
-      getPath))
-
-(def SYNTAX-STYLESHEET-PATH
-  (.. (io/file STYLESHEET-PATH "syntax.css")
-      getPath))
+            [garden.repl]
+            [blog.util :as util :refer [modular-scale-fn]]))
 
 ;; Utilities
-
-(defn whole-number? [n]
-  (= n (Math/floor n)))
-
-(defn modular-scale-fn [base ratio]
-  (let [[up down] (if (ratio? ratio)
-                    (if (< (denominator ratio)
-                           (numerator ratio))
-                      [* /]
-                      [/ *])
-                    (if (< 1 ratio)
-                      [* /]
-                      [/ *]))
-        f (float ratio)
-        us (iterate #(up % f) base)
-        ds (iterate #(down % f) base)]
-    (memoize
-     (fn ms [n]
-       (cond
-        (< 0 n) (if (whole-number? n)
-                  (nth us n)
-                  (let [m (Math/floor (float n))
-                        [a b] [(ms m) (ms (inc m))]]
-                    (+ a (* (Math/abs (- a b))
-                            (- n m)))))
-        (< n 0) (if (whole-number? n)
-                  (nth ds (Math/abs n))
-                  (let [m (Math/floor (float n))
-                        [a b] [(ms m) (ms (dec m))]]
-                    (+ a (* (Math/abs (- a b))
-                            (- n m)))))
-        :else base)))))
 
 (defn fonts [& fonts]
   (map
@@ -84,7 +41,10 @@
 (def code-font
   (fonts "Courier" "monospace"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rules
+
+;; HTML Tags
 
 (defrule a :a)
 (defrule on-hover :&:hover)
@@ -93,12 +53,18 @@
 (defrule code :code)
 (defrule blockquote :blockquote)
 
+;; Blog
+
+(defrule site :.site)
 (defrule site-title :.site-title)
+(defrule content :.content)
 (defrule post :.post)
 (defrule post-meta :.post-meta)
 (defrule post-date :.post-date)
 (defrule post-title :.post-title)
 (defrule post-content :.post-content)
+(defrule footer :.footer)
+(defrule contact :.contact)
 
 ;;;; Reset
 
@@ -117,16 +83,20 @@
 ;;;; Layout
 
 (defstyles layout
-  [:.site
-   {:width (px 640)
-    :margin [[0 "auto"]]}]
-
   (blockquote
    {:padding-left (ms 0)})
 
-  (post-meta
-   {:padding [[(ms -3) 0]]
-    :margin [[(ms 0) 0]]})
+  (site
+   {:height (% 100)
+    :overflow :scroll})
+
+  (content
+   util/container
+   {:margin [[0 "auto"]]})
+
+  (footer
+   util/container
+   {:margin [[0 "auto"]]})
 
   (post-title
    {:padding [[(ms 2) 0]]})
@@ -136,7 +106,41 @@
     {:margin [[(ms 1) 0]]}]
 
    (pre
-    {:padding [[(ms 1) 0]]})))
+    {:overflow-x :scroll}))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Small screens
+
+  (util/small-screen
+   (post
+    (util/offset 1)
+    (util/col 10)))
+
+  ;; Medium screens
+
+  (util/medium-screen
+   (post
+    (util/offset 1)
+    (util/col 10)))
+
+  ;; Large screens
+
+  (util/large-screen
+   (post
+    (util/offset 2)
+    (util/col 8))
+   
+   (footer
+    (contact
+     (util/offset 2)
+     (util/col 8))))
+
+  ;; Very large screens
+
+  (util/x-large-screen
+   (post
+    (util/offset 3)
+    (util/col 6))))
 
 ;;;; Typography
 
@@ -146,8 +150,10 @@
 
   (blockquote
    {:font-family copy-font
-    :font-size (ms 1)
     :font-style :italic})
+
+  (code
+   {:font-family code-font})
 
   (site-title
    {:text-transform :uppercase}
@@ -155,31 +161,96 @@
     {:color :inherit}))
 
   (post-date
-   {:font-family copy-font
-    :font-size (ms -1)
-    :line-height (ms 1)
-    :letter-spacing (px 1)})
+   {:font {:family copy-font
+           :style :italic}
+    :text-align :center})
 
   (post-title
-   {:font-family heading-font 
-    :font-size (ms 6)
-    :font-weight 100
-    :line-height (ms 6)})
+   {:text-align :center
+    :font {:family heading-font 
+           :weight 100}})
 
   (post-content
-   {:font-family copy-font
-    :font-size (ms 0)
-    :line-height (ms 2)}
+   {:font-family copy-font}
 
    [:p
-    {:text-align :justify}]
+    {:text-align :justify}])
+
+  ;; Small screens
+
+  (util/small-screen
+   (post-title
+    {:font-size (ms 5)})
+
+   (post-date
+    {:font-size (ms 1)})
+
+   (post-content
+    {:font-size (ms 1)
+     :line-height (ms 3)}
+    (code
+     {:font-size (ms 0)}))
 
    (pre
-    {:line-height (ms 1)}))
+    {:font-size (ms 0)
+     :line-height (ms 2)}))
 
-  (code
-   {:font-family code-font
-    :font-size (ms -0.5)}))
+  ;; Medium screens
+
+  (util/medium-screen
+   (post-title
+    {:font-size (ms 5)})
+
+   (post-date
+    {:font-size (ms 1)})
+
+   (post-content
+    {:font-size (ms 1)
+     :line-height (ms 3)}
+    (code
+     {:font-size (ms 0)}))
+
+   (pre
+    {:font-size (ms 0)
+     :line-height (ms 2)}))
+
+  ;; Large screens
+
+  (util/large-screen
+   (post-title
+    {:font-size (ms 7)})
+
+   (post-date
+    {:font-size (ms 2)})
+
+   (post-content
+    {:font-size (ms 2)
+     :line-height (ms 4)}
+    (code
+     {:font-size (ms 1)}))
+
+   (pre
+    {:font-size (ms 0)
+     :line-height (ms 2)}))
+
+  ;; iPhone 5
+
+  (util/iphone-5
+   (post-title
+    {:font-size (ms 4)})
+
+   (post-date
+    {:font-size (ms 0)})
+
+   (post-content
+    {:font-size (ms -1)
+     :line-height (ms 1)}
+    (code
+     {:font-size (ms -1.5)}))
+
+   (pre
+    {:font-size (ms -1)
+     :line-height (ms 1)})))
 
 ;;;; Theme
 
@@ -202,7 +273,8 @@
         string-symbol-color (hsl 83 31 30)]
 
     (highlight
-     {:background :none}
+     {:padding (ms 0.5)
+      :background-color (color/darken background-color 3)}
 
      (keyword
       {:color keyword-color
@@ -223,18 +295,20 @@
       {:color string-symbol-color}))))
 
 (defstyles theme
-  [:body
+  (site
    {:color text-color 
-    :background-color background-color}]
+    :background-color background-color}
+   ^:prefix
+   {:box-shadow [[:inset 0 0 (ms 8) (color/darken background-color 15)]
+                 [:inset 0 0 (ms 10) (color/darken background-color 10)]]})
 
   (a
-   {:color anchor-color})
+   {:color anchor-color}
+   (on-hover
+    {:color (color/darken anchor-color 10)}))
 
   (blockquote
    {:border-left [[(px 4) :solid text-color]]})
-
-  (post-meta
-   {:border-bottom [[(px 1) :dashed text-color]]})
 
   (post-content
    [:p

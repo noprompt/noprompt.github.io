@@ -4,9 +4,9 @@
 }
 
 *, *:before, *:after {
+  box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 html, body {
@@ -17,18 +17,113 @@ a {
   text-decoration: none;
 }
 
-.site {
-  margin: 0 auto;
-  width: 640px;
-}
-
 blockquote {
   padding-left: 16px;
 }
 
-.post-meta {
-  margin: 16px 0;
-  padding: 8.192px 0;
+.site {
+  overflow: scroll;
+  height: 100%;
+}
+
+.content {
+  margin: 0 auto;
+}
+
+.content:before, .content:after {
+  clear: both;
+  content: ' ';
+  display: table;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  
+  
+  .content {
+    max-width: 480px;
+  }
+
+}
+
+@media screen and (min-width: 481px) {
+
+  
+  
+  .content {
+    max-width: 760px;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  
+  
+  .content {
+    max-width: 1224px;
+  }
+
+}
+
+@media screen and (min-width: 1824px) {
+
+  
+  
+  .content {
+    max-width: 1824px;
+  }
+
+}
+
+.footer {
+  margin: 0 auto;
+}
+
+.footer:before, .footer:after {
+  clear: both;
+  content: ' ';
+  display: table;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  
+  
+  .footer {
+    max-width: 480px;
+  }
+
+}
+
+@media screen and (min-width: 481px) {
+
+  
+  
+  .footer {
+    max-width: 760px;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  
+  
+  .footer {
+    max-width: 1224px;
+  }
+
+}
+
+@media screen and (min-width: 1824px) {
+
+  
+  
+  .footer {
+    max-width: 1824px;
+  }
+
 }
 
 .post-title {
@@ -40,7 +135,108 @@ blockquote {
 }
 
 .post-content pre {
-  padding: 20.0px 0;
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  
+  
+  
+  
+   .post {
+    margin-left: 8.333333333333332%;
+  }
+  
+   .post {
+    width: 83.33333333333334%;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 1px;
+    position: relative;
+    float: left;
+  }
+
+}
+
+@media screen and (min-width: 481px) {
+
+  
+  
+  
+  
+   .post {
+    margin-left: 8.333333333333332%;
+  }
+  
+   .post {
+    width: 83.33333333333334%;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 1px;
+    position: relative;
+    float: left;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  
+  
+  
+  
+   .post {
+    margin-left: 16.666666666666664%;
+  }
+  
+   .post {
+    width: 66.66666666666666%;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 1px;
+    position: relative;
+    float: left;
+  }
+  
+  
+  
+  
+  
+   .footer .contact {
+    margin-left: 16.666666666666664%;
+  }
+  
+   .footer .contact {
+    width: 66.66666666666666%;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 1px;
+    position: relative;
+    float: left;
+  }
+
+}
+
+@media screen and (min-width: 1824px) {
+
+  
+  
+  
+  
+   .post {
+    margin-left: 25.0%;
+  }
+  
+   .post {
+    width: 50.0%;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 1px;
+    position: relative;
+    float: left;
+  }
+
 }
 
 body {
@@ -49,8 +245,11 @@ body {
 
 blockquote {
   font-style: italic;
-  font-size: 20.0px;
   font-family: "Gentium Basic", serif;
+}
+
+code {
+  font-family: Courier, monospace;
 }
 
 .site-title {
@@ -62,22 +261,18 @@ blockquote {
 }
 
 .post-date {
-  letter-spacing: 1px;
-  line-height: 20.0px;
-  font-size: 12.8px;
+  text-align: center;
   font-family: "Gentium Basic", serif;
+  font-style: italic;
 }
 
 .post-title {
-  line-height: 61.03515625px;
-  font-weight: 100;
-  font-size: 61.03515625px;
   font-family: "Poiret One", sans-serif;
+  font-weight: 100;
+  text-align: center;
 }
 
 .post-content {
-  line-height: 25.0px;
-  font-size: 16px;
   font-family: "Gentium Basic", serif;
 }
 
@@ -85,30 +280,136 @@ blockquote {
   text-align: justify;
 }
 
-.post-content pre {
-  line-height: 20.0px;
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  
+  
+   .post-title {
+    font-size: 48.828125px;
+  }
+  
+   .post-date {
+    font-size: 20.0px;
+  }
+  
+   .post-content {
+    line-height: 31.25px;
+    font-size: 20.0px;
+  }
+  
+   .post-content code {
+    font-size: 16px;
+  }
+  
+   pre {
+    line-height: 25.0px;
+    font-size: 16px;
+  }
+
 }
 
-code {
-  font-size: 14.080000000000002px;
-  font-family: Courier, monospace;
+@media screen and (min-width: 481px) {
+
+  
+  
+   .post-title {
+    font-size: 48.828125px;
+  }
+  
+   .post-date {
+    font-size: 20.0px;
+  }
+  
+   .post-content {
+    line-height: 31.25px;
+    font-size: 20.0px;
+  }
+  
+   .post-content code {
+    font-size: 16px;
+  }
+  
+   pre {
+    line-height: 25.0px;
+    font-size: 16px;
+  }
+
 }
 
-body {
+@media screen and (min-width: 1024px) {
+
+  
+  
+   .post-title {
+    font-size: 76.2939453125px;
+  }
+  
+   .post-date {
+    font-size: 25.0px;
+  }
+  
+   .post-content {
+    line-height: 39.0625px;
+    font-size: 25.0px;
+  }
+  
+   .post-content code {
+    font-size: 20.0px;
+  }
+  
+   pre {
+    line-height: 25.0px;
+    font-size: 16px;
+  }
+
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 568px) {
+
+  
+  
+   .post-title {
+    font-size: 39.0625px;
+  }
+  
+   .post-date {
+    font-size: 16px;
+  }
+  
+   .post-content {
+    line-height: 20.0px;
+    font-size: 12.8px;
+  }
+  
+   .post-content code {
+    font-size: 11.264px;
+  }
+  
+   pre {
+    line-height: 20.0px;
+    font-size: 12.8px;
+  }
+
+}
+
+.site {
   background-color: #fdfdf6;
   color: #2f3b1c;
+  box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
+  -moz-box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
+  -webkit-box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
 }
 
 a {
   color: #b15c35;
 }
 
-blockquote {
-  border-left: 4px solid #2f3b1c;
+a:hover {
+  color: #894829;
 }
 
-.post-meta {
-  border-bottom: 1px dashed #2f3b1c;
+blockquote {
+  border-left: 4px solid #2f3b1c;
 }
 
 .post-content p code {
@@ -117,7 +418,8 @@ blockquote {
 }
 
 .highlight {
-  background: none;
+  background-color: #fbfbe9;
+  padding: 18.0px;
 }
 
 .highlight .k {
