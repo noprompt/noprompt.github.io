@@ -363,7 +363,8 @@
       {:padding (ms 5)}
       {:font {:size (ms 3)
               :weight :normal}
-       :text-align :center})
+       :text-align :center}
+      {:color (color/lighten text-color 20)})
 
      (entries
       {:width (% 100)
