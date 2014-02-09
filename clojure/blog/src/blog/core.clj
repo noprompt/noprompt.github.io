@@ -375,7 +375,7 @@
         {:float :left
          :width 0
          :white-space :nowrap
-         :content [(for [i (range 5)]
+         :content [(for [i (range 10)]
                      "'. . . . . . . . . . . . . . . . . . . . '")]}
         {:font-family heading-font
          :line-height (ms 2.2)}
