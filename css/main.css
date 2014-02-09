@@ -401,6 +401,32 @@ body {
   color: #2f3b1c;
 }
 
+.lead-letter-image {
+  height: 175px;
+  width: 175px;
+  float: left;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .lead-letter-image {
+    display: none;
+  }
+
+}
+
+.lead-letter {
+  display: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .lead-letter {
+    display: inline;
+  }
+
+}
+
 #post .site-title {
   color: #82a34d;
 }

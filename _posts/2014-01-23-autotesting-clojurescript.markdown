@@ -5,8 +5,10 @@ date:   2014-01-25 6:00:00
 categories: clojurescript testing ruby
 ---
 
-At the time of this post, automatic testing of ClojureScript code
-hasn't made it into [`lein-cljsbuild`][lein-cljsbuild]. It is
+<img src="/img/deco_letter_a.png" class="lead-letter-image">
+<span class="lead-letter">A</span>t the time of this post, automatic
+testing of ClojureScript code hasn't made it into
+[`lein-cljsbuild`][lein-cljsbuild]. It is
 [planned][lein-cljsbuild-gh-222], however, to appear in version
 `2.0.0`. In the mean time we can get around this by using the Ruby
 [`watchr`][watchr] gem.

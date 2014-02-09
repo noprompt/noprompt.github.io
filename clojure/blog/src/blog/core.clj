@@ -326,6 +326,18 @@
    {:color text-color 
     :background-color background-color}]
 
+  [:.lead-letter-image
+   {:float :left
+    :width (px 175)
+    :height (px 175)}
+   (util/small-screen
+    {:display :none})]
+
+  [:.lead-letter
+   {:display :none}
+   (util/small-screen
+    {:display :inline})]
+
   (post-page
    (site-title
     {:color (color/lighten text-color 30)}
