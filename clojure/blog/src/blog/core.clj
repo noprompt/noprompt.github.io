@@ -87,8 +87,7 @@
    {:padding-left (ms 0)})
 
   (site
-   {:height (% 100)
-    :overflow :scroll})
+   {:height (% 100)})
 
   (content
    util/container
@@ -295,13 +294,10 @@
       {:color string-symbol-color}))))
 
 (defstyles theme
-  (site
+  [:body
    {:color text-color 
-    :background-color background-color}
-   ^:prefix
-   {:box-shadow [[:inset 0 0 (ms 8) (color/darken background-color 15)]
-                 [:inset 0 0 (ms 10) (color/darken background-color 10)]]})
-
+    :background-color background-color}]
+ 
   (a
    {:color anchor-color}
    (on-hover

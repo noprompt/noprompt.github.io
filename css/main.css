@@ -22,7 +22,6 @@ blockquote {
 }
 
 .site {
-  overflow: scroll;
   height: 100%;
 }
 
@@ -392,12 +391,9 @@ code {
 
 }
 
-.site {
+body {
   background-color: #fdfdf6;
   color: #2f3b1c;
-  box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
-  -moz-box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
-  -webkit-box-shadow: inset 0 0 95.367431640625px #f2f0b5, inset 0 0 149.01161193847656px #f6f4cb;
 }
 
 a {
