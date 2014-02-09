@@ -13,6 +13,10 @@ html, body {
   height: 100%;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   text-decoration: none;
 }
@@ -21,15 +25,12 @@ blockquote {
   padding-left: 16px;
 }
 
-.site {
-  height: 100%;
-}
-
-.content {
+#home {
+  padding-top: 48.828125px;
   margin: 0 auto;
 }
 
-.content:before, .content:after {
+#home:before, #home:after {
   clear: both;
   content: ' ';
   display: table;
@@ -39,7 +40,7 @@ blockquote {
 
   
   
-  .content {
+  #home {
     max-width: 480px;
   }
 
@@ -49,7 +50,7 @@ blockquote {
 
   
   
-  .content {
+  #home {
     max-width: 760px;
   }
 
@@ -59,7 +60,7 @@ blockquote {
 
   
   
-  .content {
+  #home {
     max-width: 1224px;
   }
 
@@ -69,17 +70,18 @@ blockquote {
 
   
   
-  .content {
+  #home {
     max-width: 1824px;
   }
 
 }
 
-.footer {
+#post {
+  padding-top: 25.0px;
   margin: 0 auto;
 }
 
-.footer:before, .footer:after {
+#post:before, #post:after {
   clear: both;
   content: ' ';
   display: table;
@@ -89,7 +91,7 @@ blockquote {
 
   
   
-  .footer {
+  #post {
     max-width: 480px;
   }
 
@@ -99,7 +101,7 @@ blockquote {
 
   
   
-  .footer {
+  #post {
     max-width: 760px;
   }
 
@@ -109,7 +111,7 @@ blockquote {
 
   
   
-  .footer {
+  #post {
     max-width: 1224px;
   }
 
@@ -119,7 +121,7 @@ blockquote {
 
   
   
-  .footer {
+  #post {
     max-width: 1824px;
   }
 
@@ -143,9 +145,7 @@ blockquote {
   
   
   
-   .post {
-    margin-left: 8.333333333333332%;
-  }
+  
   
    .post {
     width: 83.33333333333334%;
@@ -154,6 +154,10 @@ blockquote {
     min-height: 1px;
     position: relative;
     float: left;
+  }
+  
+   .post {
+    margin-left: 8.333333333333332%;
   }
 
 }
@@ -164,9 +168,7 @@ blockquote {
   
   
   
-   .post {
-    margin-left: 8.333333333333332%;
-  }
+  
   
    .post {
     width: 83.33333333333334%;
@@ -175,6 +177,10 @@ blockquote {
     min-height: 1px;
     position: relative;
     float: left;
+  }
+  
+   .post {
+    margin-left: 8.333333333333332%;
   }
 
 }
@@ -185,9 +191,7 @@ blockquote {
   
   
   
-   .post {
-    margin-left: 16.666666666666664%;
-  }
+  
   
    .post {
     width: 66.66666666666666%;
@@ -198,21 +202,8 @@ blockquote {
     float: left;
   }
   
-  
-  
-  
-  
-   .footer .contact {
+   .post {
     margin-left: 16.666666666666664%;
-  }
-  
-   .footer .contact {
-    width: 66.66666666666666%;
-    padding-right: 15px;
-    padding-left: 15px;
-    min-height: 1px;
-    position: relative;
-    float: left;
   }
 
 }
@@ -223,9 +214,7 @@ blockquote {
   
   
   
-   .post {
-    margin-left: 25.0%;
-  }
+  
   
    .post {
     width: 50.0%;
@@ -235,24 +224,41 @@ blockquote {
     position: relative;
     float: left;
   }
+  
+   .post {
+    margin-left: 25.0%;
+  }
 
 }
 
 body {
-  font-family: "Gentium Basic", serif;
+  font-family: "Della Respira", "Gentium Basic", serif;
+}
+
+#home .site-title {
+  text-align: center;
+  line-height: 76.2939453125px;
+  font-size: 76.2939453125px;
+}
+
+#post .site-title {
+  text-align: center;
 }
 
 blockquote {
   font-style: italic;
-  font-family: "Gentium Basic", serif;
+  font-family: "Della Respira", "Gentium Basic", serif;
 }
 
 code {
-  font-family: Courier, monospace;
+  font-family: Consolas, "Ubuntu Mono", Courier, monospace;
 }
 
 .site-title {
+  line-height: 39.0625px;
   text-transform: uppercase;
+  font-size: 25.0px;
+  font-family: "Poiret One", sans-serif;
 }
 
 .site-title a {
@@ -261,8 +267,7 @@ code {
 
 .post-date {
   text-align: center;
-  font-family: "Gentium Basic", serif;
-  font-style: italic;
+  font-family: "Della Respira", "Gentium Basic", serif;
 }
 
 .post-title {
@@ -272,7 +277,7 @@ code {
 }
 
 .post-content {
-  font-family: "Gentium Basic", serif;
+  font-family: "Della Respira", "Gentium Basic", serif;
 }
 
 .post-content p {
@@ -396,6 +401,14 @@ body {
   color: #2f3b1c;
 }
 
+#post .site-title {
+  color: #82a34d;
+}
+
+#post .site-title:hover {
+  color: #2f3b1c;
+}
+
 a {
   color: #b15c35;
 }
@@ -406,6 +419,10 @@ a:hover {
 
 blockquote {
   border-left: 4px solid #2f3b1c;
+}
+
+.post-date {
+  color: #66803c;
 }
 
 .post-content p code {
@@ -439,4 +456,57 @@ blockquote {
 
 .highlight .ss {
   color: #526435;
+}
+
+.toc {
+  width: 66.66666666666666%;
+  padding-right: 15px;
+  padding-left: 15px;
+  min-height: 1px;
+  position: relative;
+  float: left;
+}
+
+.toc {
+  margin-left: 16.666666666666664%;
+}
+
+.toc .toc-title {
+  padding: 48.828125px;
+  text-align: center;
+  font-size: 31.25px;
+  font-weight: normal;
+}
+
+.toc .toc-entries {
+  overflow-x: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+.toc .toc-entries .toc-entry:before {
+  content: '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ';
+  white-space: nowrap;
+  width: 0;
+  float: left;
+  line-height: 26.25px;
+  font-family: "Poiret One", sans-serif;
+  color: #82a34d;
+}
+
+.toc .toc-entries .toc-entry .toc-entry-key {
+  padding-right: 12.8px;
+  line-height: 20.0px;
+  font-size: 25.0px;
+  font-family: "Poiret One", sans-serif;
+  background: #fdfdf6;
+}
+
+.toc .toc-entries .toc-entry .toc-entry-val {
+  padding-left: 16px;
+  float: right;
+  line-height: 25.0px;
+  font-size: 18.0px;
+  background: #fdfdf6;
+  color: #4b5e2c;
 }

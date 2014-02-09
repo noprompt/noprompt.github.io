@@ -3,6 +3,12 @@
             [garden.units :refer [px percent] :rename {percent %}]
             [garden.stylesheet :refer [at-media]]))
 
+(defmacro let-list [bindings & body]
+  `(let ~bindings
+     (list ~@body)))
+
+;;
+
 (def clearfix
   [:&:before, :&:after
    {:clear :both
@@ -80,6 +86,9 @@
   {:screen true
    :min-width (px 1824)})
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Grid
+
 (def container
   (list
    [:& clear-fix]
@@ -106,6 +115,13 @@
       :padding-left (px 15)
       :padding-right (px 15)
       :width (% (* 100 (/ m 12.0)))}]))
+
+(defn block [& {:as opts}]
+  [:&
+   (when-let [c (:col opts)]
+     (col c))
+   (when-let [o (:offset opts)]
+     (offset o))])
 
 (def row
   [:& 

@@ -1,19 +1,27 @@
 ---
 layout: default
 ---
-<div class="post">
-  <div class="post-header">
-    <div class="post-title">
-      {{ page.title }}
+<div id="post">
+  <div class="content">
+    <div class="site-title">
+      <a href="/">{{ site.name }}</a>
     </div>
-    <div class="post-date">
-	<time>
-	  {{ page.date | date_to_string }}
-	</time>
-    </div>
-  </div>
 
-  <div class="post-content">
-    {{ content }}
+    <div class="post">
+      <div class="post-header">
+	<div class="post-title">
+	  {{ page.title }}
+	</div>
+	<div class="post-date">
+	  <time>
+	    {{ page.date | date_to_string }}
+	  </time>
+	</div>
+      </div>
+
+      <div class="post-content">
+	{{ content }}
+      </div>
+    </div>
   </div>
 </div>

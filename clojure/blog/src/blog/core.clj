@@ -5,10 +5,12 @@
             [garden.def :refer [defrule defcssfn defstyles defstylesheet]]
             [garden.units :refer [px em percent] :rename {percent %}]
             [garden.color :as color :refer [hsl]]
-            [garden.stylesheet :refer [at-import]]
+            [garden.stylesheet :refer [at-import rule cssfn]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.repl]
             [blog.util :as util :refer [modular-scale-fn]]))
+
+(defcssfn url)
 
 ;; Utilities
 
@@ -36,10 +38,10 @@
   (fonts "Poiret One" "sans-serif"))
 
 (def copy-font
-  (fonts "Gentium Basic" "serif"))
+  (fonts "Della Respira" "Gentium Basic" "serif"))
 
 (def code-font
-  (fonts "Courier" "monospace"))
+  (fonts "Consolas" "Ubuntu Mono" "Courier" "monospace"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rules
@@ -52,8 +54,18 @@
 (defrule pre :pre)
 (defrule code :code)
 (defrule blockquote :blockquote)
+(defrule ul :ul)
+(defrule ol :ol)
+(defrule xl :ul :ol)
+(defrule li :li)
 
 ;; Blog
+
+(defrule home-page :#home)
+(defrule post-page :#post)
+
+(defrule title :.title)
+(defrule date :.date)
 
 (defrule site :.site)
 (defrule site-title :.site-title)
@@ -63,8 +75,14 @@
 (defrule post-date :.post-date)
 (defrule post-title :.post-title)
 (defrule post-content :.post-content)
+(defrule header :.header)
+(defrule header-inner :.header-inner)
 (defrule footer :.footer)
+(defrule footer-inner :.footer-inner)
 (defrule contact :.contact)
+
+(defrule before :&:before)
+(defrule after :&:after)
 
 ;;;; Reset
 
@@ -77,6 +95,9 @@
 
   [:html, :body
    {:height (% 100)}]
+
+  [:ul
+   {:list-style :none}]
   
   (a {:text-decoration "none"}))
 
@@ -86,16 +107,19 @@
   (blockquote
    {:padding-left (ms 0)})
 
-  (site
-   {:height (% 100)})
+  ;; Home page
 
-  (content
+  (home-page
    util/container
-   {:margin [[0 "auto"]]})
+   {:margin [[0 "auto"]]
+    :padding-top (ms 5)})
 
-  (footer
+  (post-page
    util/container
-   {:margin [[0 "auto"]]})
+   {:margin [[0 "auto"]]
+    :padding-top (ms 2)})
+
+  ;; Post page
 
   (post-title
    {:padding [[(ms 2) 0]]})
@@ -111,41 +135,42 @@
   ;; Small screens
 
   (util/small-screen
-   (post
-    (util/offset 1)
-    (util/col 10)))
+   (let [block (util/block :offset 1 :col 10)]
+     (post block)))
 
   ;; Medium screens
 
   (util/medium-screen
-   (post
-    (util/offset 1)
-    (util/col 10)))
+   (let [block (util/block :offset 1 :col 10)]
+     (post block)))
 
   ;; Large screens
 
   (util/large-screen
-   (post
-    (util/offset 2)
-    (util/col 8))
-   
-   (footer
-    (contact
-     (util/offset 2)
-     (util/col 8))))
+   (let [block (util/block :offset 2 :col 8)]
+     (post block)))
 
   ;; Very large screens
 
   (util/x-large-screen
-   (post
-    (util/offset 3)
-    (util/col 6))))
+   (let [block (util/block :offset 3 :col 6)]
+     (post block))))
 
 ;;;; Typography
 
 (defstyles typography
   [:body
    {:font-family copy-font}]
+
+  (home-page
+   (site-title
+    {:font-size (ms 7)
+     :line-height (ms 7)
+     :text-align :center}))
+
+  (post-page
+   (site-title
+    {:text-align :center}))
 
   (blockquote
    {:font-family copy-font
@@ -155,13 +180,16 @@
    {:font-family code-font})
 
   (site-title
-   {:text-transform :uppercase}
+   {:font {:size (ms 2)
+           :family heading-font}
+    :text {:transform :uppercase}
+    :line-height (ms 4)}
+
    (a
     {:color :inherit}))
 
   (post-date
-   {:font {:family copy-font
-           :style :italic}
+   {:font {:family copy-font}
     :text-align :center})
 
   (post-title
@@ -297,6 +325,12 @@
   [:body
    {:color text-color 
     :background-color background-color}]
+
+  (post-page
+   (site-title
+    {:color (color/lighten text-color 30)}
+    (on-hover
+     {:color text-color})))
  
   (a
    {:color anchor-color}
@@ -306,16 +340,67 @@
   (blockquote
    {:border-left [[(px 4) :solid text-color]]})
 
+  (post-date
+   {:color (color/lighten text-color 20)})
+
   (post-content
    [:p
     (code
      {:color (color/lighten text-color 5)
       :background-color (color/darken background-color 5)})]))
 
+(defstyles table-of-contents
+  (let [toc (rule :.toc)
+        title (rule :.toc-title)
+        entries (rule :.toc-entries)
+        entry (rule :.toc-entry)
+        entry-key (rule :.toc-entry-key)
+        entry-val (rule :.toc-entry-val)]
+    (toc
+     (util/block :offset 2 :col 8) 
+
+     (title
+      {:padding (ms 5)}
+      {:font {:size (ms 3)
+              :weight :normal}
+       :text-align :center})
+
+     (entries
+      {:width (% 100)
+       :padding 0
+       :overflow-x :hidden}
+
+      (entry
+       (before
+        {:float :left
+         :width 0
+         :white-space :nowrap
+         :content [(for [i (range 5)]
+                     "'. . . . . . . . . . . . . . . . . . . . '")]}
+        {:font-family heading-font
+         :line-height (ms 2.2)}
+        {:color (color/lighten text-color 30)})
+
+       (entry-key
+        {:padding-right (ms -1)}
+        {:font {:size (ms 2)
+                :family heading-font}
+         :line-height (ms 1)}
+        {:background background-color})
+
+       (entry-val
+        {:float :right
+         :padding-left (ms 0)}
+        {:font-size (ms 0.5)
+         :line-height (ms 2)}
+        {:color (color/lighten text-color 10)
+         :background background-color}))))))
+
 (defstyles main 
   reset
   layout
   typography
   theme
-  syntax)
+  syntax
+  table-of-contents)
 
