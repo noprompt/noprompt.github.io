@@ -24,6 +24,19 @@
    :min-width (px 320)
    :max-width (px 480)})
 
+(defbreakpoint medium-screen
+  {:screen true
+   :min-width (px 481)
+   :max-width (px 1023)})
+
+(defbreakpoint large-screen
+  {:screen true
+   :min-width (px 1024)})
+
+(defbreakpoint x-large-screen
+  {:screen true
+   :min-width (px 1824)})
+
 ;; iPhone 2G, 3G, 4, 4S
 
 (def iphone-media-params
@@ -56,29 +69,6 @@
 (defbreakpoint iphone-5-portrait
   (assoc iphone-5-media-params :orientation :portrait))
 
-(defbreakpoint medium-screen
-  {:screen true
-   :min-width (px 481)})
-
-(defbreakpoint medium-screen-landscape
-  {:screen true
-   :min-width (px 768)
-   :max-width (px 1024)
-   :orientation :landscape})
-
-(defbreakpoint medium-screen-portrait
-  {:screen true
-   :min-width (px 768)
-   :max-width (px 1024)
-   :orientation :portrait})
-
-(defbreakpoint large-screen
-  {:screen true
-   :min-width (px 1024)})
-
-(defbreakpoint x-large-screen
-  {:screen true
-   :min-width (px 1824)})
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Grid

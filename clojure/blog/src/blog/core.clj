@@ -164,9 +164,21 @@
 
   (home-page
    (site-title
-    {:font-size (ms 7)
-     :line-height (ms 7)
-     :text-align :center}))
+    {:text-align :center}
+
+    (util/large-screen
+     {:font-size (ms 7)
+      :line-height (ms 7)})
+
+    (util/medium-screen
+     {:padding [[0 (ms 1)]]
+      :font-size (ms 6)
+      :line-height (ms 7)})
+
+    (util/small-screen
+     {:padding [[0 (ms 1)]]
+      :font-size (ms 5)
+      :line-height (ms 6)})))
 
   (post-page
    (site-title
@@ -385,30 +397,63 @@
 
       (entry
        {:margin-bottom (ms 2)}
-       (before
-        {:float :left
-         :width 0
-         :white-space :nowrap
-         :content [(for [i (range 10)]
-                     "'. . . . . . . . . . . . . . . . . . . . '")]}
-        {:font-family heading-font
-         :line-height (ms 2.2)}
-        {:color (color/lighten text-color 30)})
+       (util/large-screen
+        (before
+         {:float :left
+          :width 0
+          :white-space :nowrap
+          :content [(for [i (range 10)]
+                      "'. . . . . . . . . . . . . . . . . . . . '")]}
+         {:font-family heading-font
+          :line-height (ms 2.2)}
+         {:color (color/lighten text-color 30)}))
 
-       (entry-key
-        {:padding-right (ms -1)}
-        {:font {:size (ms 2)
-                :family heading-font}
+       (util/medium-screen
+        {:padding-bottom (ms 1)
+         :margin-bottom (ms 1)}
+        {:border-bottom [[(px 1) :dotted (color/lighten text-color 50)]]})
+       
+       (util/small-screen
+        {:padding-bottom (ms 1)
+         :margin-bottom (ms 1)}
+        {:border-bottom [[(px 1) :dotted (color/lighten text-color 50)]]}))
+
+
+      (entry-key
+       {:font-family heading-font}
+
+       (util/large-screen
+        {:font-size (ms 2)
          :line-height (ms 1)}
+        {:padding-right (ms -1)}
         {:background background-color})
 
-       (entry-val
+       (util/medium-screen
+        {:display :block}
+        {:font-size (ms 2)
+         :line-height (ms 3)})
+
+       (util/small-screen
+        {:display :block}
+        {:font {:size (ms 2)}}))
+
+
+      (entry-val
+       {:color (color/lighten text-color 10)}
+
+       (util/large-screen
         {:float :right
          :padding-left (ms 0)}
         {:font-size (ms 0.5)
          :line-height (ms 2)}
-        {:color (color/lighten text-color 10)
-         :background background-color}))))))
+        {:background background-color})
+
+       (util/medium-screen
+        {:color (color/lighten text-color 20)})
+
+       (util/small-screen
+        {:font {:size (ms -1)}}
+        {:color (color/lighten text-color 20)}))))))
 
 (defstyles main 
   reset
@@ -417,3 +462,4 @@
   theme
   syntax
   table-of-contents)
+

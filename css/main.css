@@ -46,7 +46,7 @@ blockquote {
 
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px) and (max-width: 1023px) {
 
   
   
@@ -97,7 +97,7 @@ blockquote {
 
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px) and (max-width: 1023px) {
 
   
   
@@ -162,7 +162,7 @@ blockquote {
 
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px) and (max-width: 1023px) {
 
   
   
@@ -237,8 +237,35 @@ body {
 
 #home .site-title {
   text-align: center;
-  line-height: 76.2939453125px;
-  font-size: 76.2939453125px;
+}
+
+@media screen and (min-width: 1024px) {
+
+  #home .site-title {
+    line-height: 76.2939453125px;
+    font-size: 76.2939453125px;
+  }
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 1023px) {
+
+  #home .site-title {
+    line-height: 76.2939453125px;
+    font-size: 61.03515625px;
+    padding: 0 20.0px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  #home .site-title {
+    line-height: 61.03515625px;
+    font-size: 48.828125px;
+    padding: 0 20.0px;
+  }
+
 }
 
 #post .site-title {
@@ -312,7 +339,7 @@ code {
 
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px) and (max-width: 1023px) {
 
   
   
@@ -515,29 +542,105 @@ blockquote {
   margin-bottom: 25.0px;
 }
 
-.toc .toc-entries .toc-entry:before {
-  content: '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ';
-  white-space: nowrap;
-  width: 0;
-  float: left;
-  line-height: 26.25px;
-  font-family: "Poiret One", sans-serif;
-  color: #82a34d;
+@media screen and (min-width: 1024px) {
+
+  
+  
+  .toc .toc-entries .toc-entry:before {
+    content: '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ';
+    white-space: nowrap;
+    width: 0;
+    float: left;
+    line-height: 26.25px;
+    font-family: "Poiret One", sans-serif;
+    color: #82a34d;
+  }
+
 }
 
-.toc .toc-entries .toc-entry .toc-entry-key {
-  padding-right: 12.8px;
-  line-height: 20.0px;
-  font-size: 25.0px;
-  font-family: "Poiret One", sans-serif;
-  background: #fdfdf6;
+@media screen and (min-width: 481px) and (max-width: 1023px) {
+
+  .toc .toc-entries .toc-entry {
+    margin-bottom: 20.0px;
+    padding-bottom: 20.0px;
+    border-bottom: 1px dotted #b2c98d;
+  }
+
 }
 
-.toc .toc-entries .toc-entry .toc-entry-val {
-  padding-left: 16px;
-  float: right;
-  line-height: 25.0px;
-  font-size: 18.0px;
-  background: #fdfdf6;
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .toc .toc-entries .toc-entry {
+    margin-bottom: 20.0px;
+    padding-bottom: 20.0px;
+    border-bottom: 1px dotted #b2c98d;
+  }
+
+}
+
+.toc .toc-entries .toc-entry-key {
+  font-family: "Poiret One", sans-serif;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .toc .toc-entries .toc-entry-key {
+    line-height: 20.0px;
+    font-size: 25.0px;
+    padding-right: 12.8px;
+    background: #fdfdf6;
+  }
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 1023px) {
+
+  .toc .toc-entries .toc-entry-key {
+    display: block;
+    line-height: 31.25px;
+    font-size: 25.0px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .toc .toc-entries .toc-entry-key {
+    display: block;
+    font-size: 25.0px;
+  }
+
+}
+
+.toc .toc-entries .toc-entry-val {
   color: #4b5e2c;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .toc .toc-entries .toc-entry-val {
+    padding-left: 16px;
+    float: right;
+    line-height: 25.0px;
+    font-size: 18.0px;
+    background: #fdfdf6;
+  }
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 1023px) {
+
+  .toc .toc-entries .toc-entry-val {
+    color: #66803c;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .toc .toc-entries .toc-entry-val {
+    font-size: 12.8px;
+    color: #66803c;
+  }
+
 }
