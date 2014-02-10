@@ -65,7 +65,8 @@ expresses what is happening in the stylesheet.
 
 (defbreakpoint medium-screen
   {:screen true
-   :min-width (px 481)})
+   :min-width (px 481)
+   :max-width (px 1023})
 
 (defbreakpoint large-screen
   {:screen true
@@ -111,7 +112,7 @@ And the resulting CSS:
 }
 ```
 
-In conclusion, I'm very happy to have been able to achieved this
+In conclusion, I'm very happy to have been able to achieve this
 amount expressivity and utility with such a short amount of code. This
 was one of my first attempts at using Clojure's macro facilities with
 Garden oriented code and I'm excited to see what else is possible.
