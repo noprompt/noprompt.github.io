@@ -384,6 +384,7 @@
        :overflow-x :hidden}
 
       (entry
+       {:margin-bottom (ms 2)}
        (before
         {:float :left
          :width 0
@@ -416,4 +417,3 @@
   theme
   syntax
   table-of-contents)
-

@@ -3,12 +3,6 @@
             [garden.units :refer [px percent] :rename {percent %}]
             [garden.stylesheet :refer [at-media]]))
 
-(defmacro let-list [bindings & body]
-  `(let ~bindings
-     (list ~@body)))
-
-;;
-
 (def clearfix
   [:&:before, :&:after
    {:clear :both
@@ -37,7 +31,7 @@
    :min-device-width (px 320)
    :max-device-width (px 480)})
 
-(defbreakpoint iPhone
+(defbreakpoint iphone
   iphone-media-params)
 
 (defbreakpoint iphone-landscape
