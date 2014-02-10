@@ -99,7 +99,7 @@ And the resulting CSS:
   }
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px) and (max-width: 1023) {
   .container {
     max-width: 760px;
   }
