@@ -10,8 +10,8 @@ categories: clojurescript testing ruby
 testing of ClojureScript code hasn't made it into
 [`lein-cljsbuild`][lein-cljsbuild]. It is
 [planned][lein-cljsbuild-gh-222], however, to appear in version
-`2.0.0`. In the mean time we can get around this by using the Ruby
-[`watchr`][watchr] gem.
+`2.0.0`. In the mean time we can get around this by using the
+`:notify-command` option for test builds.
 
 For this article I will assume you are using
 [`clojurescript.test`][clojurescript.test] and your `project.clj`
@@ -35,34 +35,35 @@ contains roughly the equivalent code:
                                  "target/testable.js"]}})
 ```
 
-Because we will be using our own testing solution instead of `lein
-cljsbuild test`, it will be necessary to save a copy of the
-[test runner code][runner.js] &mdash; which now comes prepackaged with
-`clojurescript.test` &mdash; to somewhere in your
-project directory. I like to save this file to `test/runner.js`.
+To get auto testing we need to update our project to something
+similar to the following:
 
-Next, install the `watchr` gem from the command line with `gem install
-watchr` and create a `watchr` file in the root of your project
-directory with the following contents:
-
-```ruby
-watch("target/testable.js") do |file|
-  system("phantomjs test/runner.js window.literal_js_was_evaluated=true target/testable.js")
-end
+```clojure
+(defproject my-project "0.1.0-SNAPSHOT"
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.clojure/clojurescript "0.0-2138"]]
+  :plugins [[lein-cljsbuild "1.0.1"]
+            [com.cemerick/clojurescript.test "0.2.1"]]
+  :profiles {:dev {:plugins [[com.cemerick/clojurescript.test "0.2.3-SNAPSHOT"]]}}
+  :cljsbuild
+  {:builds [{:id "test"
+             :source-paths ["src" "test"]
+			 :notify-command ["phantomjs" :cljs.test/runner "target/testable.js"]
+             :compiler
+             {:output-to "target/testable.js"
+              :optimizations :whitespace
+              :pretty-print true}}]})
 ```
 
-This instructs `watchr` to execute the contents of the `do` block
-whenever it detects changes to the `target/testable.js` file. As you can tell
-we are executing the same `phantomjs` command as `lein cljsbuild test`
-with the exception the `:runner` keyword has been manually replaced
-with the location of the `runner.js` file we created earlier.
+All that we've done here is add
+`[com.cemerick/clojurescript.test "0.2.3-SNAPSHOT"]` dependency to a
+`:dev` profile and the `:notify-command` to our test build
+configuration. Using the latest `SNAPSHOT` release of
+`clojurescript.test` allows us to use the `:cljs.test/runner` keyword
+in our `:notify-command` configuration.
 
-At this point we can open two seperate terminal windows, change to our
-project directory and run `lein cljsbuild auto test` in one and
-`watchr ./watchr` in the other. Now, whenever we modify and save code
-in our `:source-paths`, `target/testable.js` will be recompiled and `watchr`
-will run our `phantomjs` command. If everything goes right we should
-see the results of our tests in the window where `watchr` is running.
+Now we can run `lein cljsbuild auto test` from the
+command line and watch as our tests get run immediately after compile. 
 
 ```
 Compiling ClojureScript.
@@ -76,32 +77,14 @@ Ran 10 tests containing 36 assertions.
 {:test 10, :pass 36, :fail 0, :error 0, :type :summary}
 ```
 
-This is great but, personally, I'm not a big fan of having two
-terminal windows open. Here's a little Ruby script I use to start up
-both processes:
+To top it off you can add an `auto-test` alias to your `project.clj`.
 
-```ruby
-#!/usr/bin/env ruby
-
-cljsbuild_pid = fork { system("lein cljsbuild auto test") }
-watchr_pid = fork { system("watchr ./watchr") }
-
-begin
-  while true do
-    sleep 1000
-  end
-rescue Interrupt
-ensure
-  Process.kill(:INT, cljsbuild_pid) 
-  Process.kill(:INT, watchr_pid) 
-end
+```clojure
+:aliases {"auto-test" ["do" "clean," "cljsbuild" "auto" "test"]}
 ```
 
-Happy testing!
+Happy auto testing!
 
 [lein-cljsbuild]: https://github.com/emezeske/lein-cljsbuild
 [lein-cljsbuild-gh-222]: https://github.com/emezeske/lein-cljsbuild/pull/222
-[watchr]: https://github.com/mynyml/watchr 
-[bundler]: http://bundler.io/
 [clojurescript.test]: https://github.com/cemerick/clojurescript.test
-[runner.js]: https://raw.github.com/cemerick/clojurescript.test/master/resources/cemerick/cljs/test/runner.js
