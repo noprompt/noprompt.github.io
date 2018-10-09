@@ -1,0 +1,172 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*:after, *:before, * {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #EEEEEE;
+  font-size: 10px;
+  line-height: 20px;
+}
+
+code {
+  font-family: Inconsolata, monospace;
+}
+
+#main {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.box {
+  display: flex;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.buffer {
+  font-family: Inconsolata, monospace;
+  white-space: pre;
+}
+
+.buffer .buffer-parsed {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.buffer .buffer-unparsed {
+  opacity: 0.5;
+}
+
+.buffer-editor {
+  display: flex;
+  flex-grow: 1;
+  padding: 0;
+  font-family: Inconsolata, monospace;
+  font-size: 10px;
+  line-height: 20px;
+  border: none;
+  outline: none;
+  resize: vertical;
+}
+
+.column-box {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+}
+
+.panel {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.panel-box {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 10px;
+}
+
+.panel-header {
+  line-height: 40px;
+  max-height: 40px;
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: bold;
+  background: #5E54A0;
+  padding: 0 10px;
+  display: flex;
+  font-family: Futura;
+}
+
+.row-box {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+}
+
+.window {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 5px;
+}
+
+.buffer-box {
+  overflow-y: scroll;
+}
+
+.coordinates-box {
+  color: #FFFFFF;
+  background-color: #5E54A0;
+  align-items: flex-end;
+  max-height: 40px;
+}
+
+.point-number, .line-number, .column-number {
+  display: block;
+  font-family: Inconsolata, monospace;
+  font-size: 10px;
+  line-height: 20px;
+}
+
+.grammar-box, .stack-box, .continuation-box {
+  overflow-y: scroll;
+}
+
+.continuation, .stack {
+  white-space: pre;
+}
+
+.button-box {
+  background-color: #EEEEEE;
+  align-items: flex-end;
+  max-height: 40px;
+}
+
+.button {
+  background-color: #5E54A0;
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  color: #FFFFFF;
+  border: none;
+  outline: none;
+  font-family: Inconsolata, monospace;
+  font-weight: bold;
+  font-size: 10px;
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0;
+  line-height: 40px;
+}
+
+.button:active {
+  background-color: hsla(247.8947368421053, 31.147540983606557%, 37.843137254901954%, 1.0);
+}
+
+.step-button-panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.step-button-panel .step-button-box {
+  display: flex;
+  flex-grow: 1;
+}

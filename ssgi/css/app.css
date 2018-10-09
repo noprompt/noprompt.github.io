@@ -1,0 +1,253 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*:after, *:before, * {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #EEEEEE;
+  font-size: 10px;
+  line-height: 20px;
+}
+
+code {
+  font-family: Inconsolata, monospace;
+}
+
+#main {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.box {
+  display: flex;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.buffer {
+  font-family: Inconsolata, monospace;
+  white-space: pre;
+}
+
+.buffer .buffer-parsed {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.buffer .buffer-unparsed {
+  opacity: 0.5;
+}
+
+.buffer-editor {
+  display: flex;
+  flex-grow: 1;
+  padding: 0;
+  font-family: Inconsolata, monospace;
+  font-size: 10px;
+  line-height: 20px;
+  border: none;
+  outline: none;
+  resize: vertical;
+}
+
+.column-box {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+}
+
+.help-window {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 5px;
+  flex-basis: auto;
+  flex-grow: 0;
+  min-height: 30px;
+  max-height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: Inconsolata, monospace;
+  line-height: 30px;
+  white-space: pre;
+  background-color: hsla(248.4615384615385, 39.0%, 19.2156862745098%, 1.0);
+  color: #FFF;
+}
+
+.help-window p {
+  margin: 0;
+  max-height: 30px;
+  padding: 0;
+  line-height: 30px;
+}
+
+.options-window {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 5px;
+  flex-basis: auto;
+  flex-grow: 0;
+  min-height: 40px;
+}
+
+.options-window label {
+  font-family: Inconsolata, monospace;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.options-window input[type="number"] {
+  border: 1px solid hsl(0, 0%, 90%);
+  outline: none;
+  font-family: Inconsolata, monospace;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+}
+
+.options-window input[type="text"] {
+  border: 1px solid hsl(0, 0%, 90%);
+  font-family: Inconsolata, monospace;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.panel {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.panel-box {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 10px;
+}
+
+.panel-header {
+  line-height: 40px;
+  max-height: 40px;
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: bold;
+  background: darkslateblue;
+  padding: 0 10px;
+  display: flex;
+  font-family: Futura;
+}
+
+.row-box {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+}
+
+.step-button-panel {
+  max-height: 40px;
+}
+
+.step-button-window {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 5px;
+  flex-basis: auto;
+  flex-grow: 0;
+}
+
+.window {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 5px;
+}
+
+.buffer-box {
+  overflow-y: scroll;
+}
+
+.coordinates-box {
+  color: #FFFFFF;
+  background-color: darkslateblue;
+  align-items: flex-end;
+  max-height: 40px;
+}
+
+.point-number, .line-number, .step-number, .column-number {
+  display: block;
+  font-family: Inconsolata, monospace;
+  font-size: 10px;
+  line-height: 20px;
+}
+
+.grammar-box, .stack-box, .continuation-box {
+  width: 100%;
+  overflow: scroll;
+}
+
+.continuation, .stack, .control {
+  display: block;
+  height: 100%;
+  width: 100%;
+  font-family: Inconsolata, monospace;
+  font-size: 10px;
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+
+.button-box {
+  background-color: #EEEEEE;
+  align-items: flex-end;
+  max-height: 40px;
+}
+
+.button {
+  background-color: darkslateblue;
+  color: #FFFFFF;
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0;
+  border: none;
+  outline: none;
+  font-family: Inconsolata, monospace;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 40px;
+}
+
+.button:hover {
+  background-color: hsla(248.4615384615385, 39.0%, 34.2156862745098%, 1.0);
+}
+
+.button:active {
+  background-color: hsla(248.4615384615385, 39.0%, 29.2156862745098%, 1.0);
+}
+
+.step-button-panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.step-button-panel .step-button-box {
+  display: flex;
+  flex-grow: 1;
+}
