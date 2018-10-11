@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="css/main.css">
+    <!--
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML" async></script>
+    -->
   </head>
   <body>
     <h2>Projects</h2>
@@ -16,5 +22,102 @@
         <a href="/ssgi">Demo</a>
       </li>
     </ul>
+    <h4>Definition</h4>
+    <p>
+      The state space Σ of the machine is defined as
+      <dl>
+        <dt>ς ∈ Σ =</dt>
+        <dd><em>Grammar</em> × <em>Buffer</em> × <em>Point</em> × <em>Control</em> × <em>Token*</em> × <em>Continuation</em></dd>
+      </dl>
+    </p>
+    <p>
+      A grammar is a function which maps non-terminal symbols <em>N</em> to metalinguistic expressions <em>M</em>.
+      <dl>
+        <dt><em>Grammar</em> =</dt>
+        <dd>N → M</dd>
+      </dl>
+    </p>
+    <dl>
+      <dt><em>m</em> ∈ <em>M</em> ::=</dt>
+      <dd>
+        &nbsp;&nbsp;(<strong>!=</strong> <em>m</em>)
+        <br>
+        | (<strong>*</strong> <em>m</em>)
+        <br>
+        | (<strong>+</strong> <em>m</em>)
+        <br>
+        | (<strong>==</strong> <em>m</em>)
+        <br>
+        | (<strong>?</strong> <em>m</em>)
+        <br>
+        | (<strong>_</strong> <em>m</em>)
+        <br>
+        | (<strong>|</strong> <em>m</em> ...)
+        <br>
+        | (<em>m</em> ...)
+        <br>
+        | <em>t</em> where <em>t</em> ∈ <em>S*</em>
+        <br>
+        | <em>n</em> where <em>n</em> ∈ <em>N</em>
+      </dd>
+    </dl>
+    <p>
+      A buffer <em>b</em> is the string being read by the parser.
+    </p>
+    <dl>
+      <dt>Buffer =</dt> 
+      <dd>b ∈ S*</dd>
+    </dl>
+    <p>
+      A point <em>p</em> is a natural number ℕ and represents a position in the buffer.
+    </p>
+    <p>
+      A control is the current metalinguistic expression being evaluated.
+    </p>
+    <dl>
+      <dt>c ∈ Control ::=</dt>
+      <dd>
+        &nbsp;&nbsp;<strong>okay</strong>
+        <br>
+        | <strong>fail</strong>
+        <br>
+        | <em>m</em>
+      </dd>
+    </dl>
+    <p>
+      where {<strong>fail</strong>, <strong>okay</strong>} ∉ M. 
+    </p>
+    <p>
+      A token <em>τ</em> is a triple of a non-terminal symbol <em>n</em>, a start point <em>p₁</em>, and an end point <em>p₂</em>.
+    </p>
+    <p>
+      τ ∈ Token where <em>τ</em> = (<em>n</em> × <em>p₁</em> × <em>p₂</em>).
+    </p>
+    <p>
+      A continuation <em>κ</em> is the parser program stack.
+    </p>
+    <dl>
+      <dt>κ ∈ Continuation ::=</dt>
+      <dd>
+        &nbsp;&nbsp;(<strong>choice</strong> (c ...)  p  (τ ...)  (τ ...)  κ)
+        <br>
+        | (<strong>confirm</strong> p  (τ ...)  κ)
+        <br>
+        | (<strong>drop</strong> (τ ...)  κ)
+        <br>
+        | (<strong>negate</strong> p (τ ...) κ)
+        <br>
+        | (<strong>resume</strong> (τ ...) κ)
+        <br>
+        | (<strong>sequence</strong> (c ...) κ)
+        <br>
+        | (<strong>token</strong> n  p  κ)
+      </dd>
+    </dl>
+    <h4>Transition</h4>
+    <p>
+      The transition function <em>ς</em> ⇀ <em>ς′</em> is defined as.
+    </p>
   </body>
 </html>
+
